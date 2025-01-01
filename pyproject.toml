@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "github-agent"
+version = "0.1.0"
+description = "A simple AI agent within Python using Retrieval Augmented Generation (RAG) and LangChain."
+authors = ["Sakhile L. Ndlazi <sakhilelindah@gmail.com>"]
+license = "GPL v3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
