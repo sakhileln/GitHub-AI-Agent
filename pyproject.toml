@@ -8,6 +8,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+python-dotenv = "^1.0.1"
+requests = "^2.32.3"
+langchain = "^0.3.13"
+langchain-astradb = "^0.5.2"
+langchainhub = "^0.1.21"
 
 
 [build-system]
