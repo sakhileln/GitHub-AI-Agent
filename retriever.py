@@ -54,3 +54,5 @@ if __name__ == "__main__":
     repo = "Space-Nomad"
     endpoint = "issues"
     fetch_github(owner, repo, endpoint)
+
+    print(fetch_github_issues(owner, repo))
