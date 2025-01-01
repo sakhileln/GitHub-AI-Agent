@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_astradb import AstraDBVectorStore
 from langchain.agents import create_tool_calling_agent
 from langchain.agents import AgentExecutor
@@ -63,7 +63,9 @@ retriever_tool = create_retriever_tool(
     "Search for information about github issues. For any questions about github issues, you must use this tool!",
 )
 
-llm_pipeline = pipeline("text-generation", model="facebook/opt-350m")  # Example: OPT with 350M parameters
+# llm_pipeline = pipeline("text-generation", model="facebook/opt-350m")  # Example: OPT with 350M parameters
+# Disable GPU usage
+llm_pipeline = pipeline("text-generation", model="facebook/opt-350m", device=-1)
 
 # Wrap Hugging Face model into a callable for LangChain
 class HuggingFaceAgentWrapper:
