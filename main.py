@@ -86,7 +86,7 @@ class HuggingFaceAgentWrapper:
                 raise TypeError("Input to HuggingFace pipeline must be a string or convertible to string.")
 
         # Generate response using the pipeline
-        response = self.pipeline(input_text, max_length=512, num_return_sequences=1)
+        response = self.pipeline(input_text, max_length=512, truncation=True, num_return_sequences=1)
         return response[0]["generated_text"]
 
     def bind_tools(self, tools):
