@@ -6,6 +6,8 @@ from langchain_astradb import AstraDBVectorStore
 from langchain.agents import create_tool_calling_agent
 from langchain.agents import AgentExecutor
 from langchain.tools.retriever import create_retriever_tool
+from langchain.schema import ChatGeneration
+from langchain.schema import BaseMessage, AIMessage
 from langchain import hub
 from transformers import pipeline
 
@@ -17,16 +19,12 @@ load_dotenv()
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def connect_to_vstore():
-    # Use Hugging Face embeddings
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
     ASTRA_DB_API_ENDPOINT = os.getenv("ASTRA_DB_API_ENDPOINT")
     ASTRA_DB_APPLICATION_TOKEN = os.getenv("ASTRA_DB_APPLICATION_TOKEN")
     desired_namespace = os.getenv("ASTRA_DB_KEYSPACE")
-
-    if desired_namespace:
-        ASTRA_DB_KEYSPACE = desired_namespace
-    else:
-        ASTRA_DB_KEYSPACE = None
+    
+    ASTRA_DB_KEYSPACE = desired_namespace if desired_namespace else None
 
     vstore = AstraDBVectorStore(
         embedding=embeddings,
@@ -37,12 +35,8 @@ def connect_to_vstore():
     )
     return vstore
 
-
 vstore = connect_to_vstore()
-add_to_vectorstore = input("Do you want to update the issues? (y/N): ").lower() in [
-    "yes",
-    "y",
-]
+add_to_vectorstore = input("Do you want to update the issues? (y/N): ").lower() in ["yes", "y"]
 
 if add_to_vectorstore:
     owner = "sakhileln"
@@ -66,8 +60,7 @@ retriever_tool = create_retriever_tool(
 
 tools = [retriever_tool, note_tool]
 
-# llm_pipeline = pipeline("text-generation", model="facebook/opt-350m")  # Example: OPT with 350M parameters
-# Disable GPU usage
+# Initialize Hugging Face pipeline
 llm_pipeline = pipeline("text-generation", model="facebook/opt-350m", device=-1)
 
 # Wrap Hugging Face model into a callable for LangChain
@@ -76,7 +69,7 @@ class HuggingFaceAgentWrapper:
         self.pipeline = pipeline
 
     def __call__(self, input_text):
-        # Check if input_text is not a string, then convert
+        # Ensure input is a string
         if not isinstance(input_text, str):
             if hasattr(input_text, "to_string"):
                 input_text = input_text.to_string()
@@ -87,20 +80,26 @@ class HuggingFaceAgentWrapper:
 
         # Generate response using the pipeline
         response = self.pipeline(input_text, max_length=512, truncation=True, num_return_sequences=1)
-        return response[0]["generated_text"]
+
+        # Ensure response is a string
+        generated_text = response[0]["generated_text"]
+        if not isinstance(generated_text, str):
+            raise TypeError(f"Generated text is expected to be a string, got {type(generated_text)} instead.")
+
+        # Construct the required `message` object for ChatGeneration
+        ai_message = AIMessage(content=generated_text)
+
+        # Return as a ChatGeneration instance
+        return [ChatGeneration(message=ai_message)]
 
     def bind_tools(self, tools):
-        # Implement this method for compatibility with LangChain's create_tool_calling_agent
         self.tools = tools
         return self
 
 llm = HuggingFaceAgentWrapper(llm_pipeline)
-
-# Bind the tools to the LLM
 llm = llm.bind_tools(tools)
 
 prompt = hub.pull("hwchase17/openai-functions-agent")
-tools = [retriever_tool, note_tool]
 agent = create_tool_calling_agent(llm, tools, prompt)
 agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
