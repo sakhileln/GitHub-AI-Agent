@@ -14,6 +14,7 @@ from summarizer import note_tool
 
 load_dotenv()
 
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def connect_to_vstore():
     # Use Hugging Face embeddings
@@ -63,6 +64,8 @@ retriever_tool = create_retriever_tool(
     "Search for information about github issues. For any questions about github issues, you must use this tool!",
 )
 
+tools = [retriever_tool, note_tool]
+
 # llm_pipeline = pipeline("text-generation", model="facebook/opt-350m")  # Example: OPT with 350M parameters
 # Disable GPU usage
 llm_pipeline = pipeline("text-generation", model="facebook/opt-350m", device=-1)
@@ -73,10 +76,18 @@ class HuggingFaceAgentWrapper:
         self.pipeline = pipeline
 
     def __call__(self, input_text):
-        return self.pipeline(input_text, max_length=512, num_return_sequences=1)[0]['generated_text']
+        response = self.pipeline(input_text, max_length=512, num_return_sequences=1)
+        return response[0]['generated_text']
+
+    def bind_tools(self, tools):
+        # Implement this method for compatibility with LangChain's create_tool_calling_agent
+        self.tools = tools
+        return self
 
 llm = HuggingFaceAgentWrapper(llm_pipeline)
 
+# Bind the tools to the LLM
+llm = llm.bind_tools(tools)
 
 prompt = hub.pull("hwchase17/openai-functions-agent")
 tools = [retriever_tool, note_tool]
