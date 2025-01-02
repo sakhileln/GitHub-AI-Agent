@@ -76,8 +76,18 @@ class HuggingFaceAgentWrapper:
         self.pipeline = pipeline
 
     def __call__(self, input_text):
+        # Check if input_text is not a string, then convert
+        if not isinstance(input_text, str):
+            if hasattr(input_text, "to_string"):
+                input_text = input_text.to_string()
+            elif hasattr(input_text, "__str__"):
+                input_text = str(input_text)
+            else:
+                raise TypeError("Input to HuggingFace pipeline must be a string or convertible to string.")
+
+        # Generate response using the pipeline
         response = self.pipeline(input_text, max_length=512, num_return_sequences=1)
-        return response[0]['generated_text']
+        return response[0]["generated_text"]
 
     def bind_tools(self, tools):
         # Implement this method for compatibility with LangChain's create_tool_calling_agent
