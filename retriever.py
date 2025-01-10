@@ -7,11 +7,10 @@ load_dotenv()
 
 github_token = os.getenv("GITHUB_TOKEN")
 
+
 def fetch_github(owner, repo, endpoint):
     url = f"https://api.github.com/repos/{owner}/{repo}/{endpoint}"
-    headers = {
-        "Authorization": f"Bearer {github_token}"
-    }
+    headers = {"Authorization": f"Bearer {github_token}"}
     response = requests.get(url, headers=headers, timeout=10)
 
     if response.status_code == 200:
@@ -22,7 +21,7 @@ def fetch_github(owner, repo, endpoint):
 
     print(data)
     return data
-    
+
 
 def load_issues(issues):
     docs = []
@@ -33,7 +32,7 @@ def load_issues(issues):
             "comments": entry["comments"],
             "body": entry["body"],
             "labels": entry["labels"],
-            "created_at": entry["created_at"]
+            "created_at": entry["created_at"],
         }
         data = entry["title"]
         if entry["body"]:
@@ -48,6 +47,7 @@ def load_issues(issues):
 def fetch_github_issues(owner, repo):
     data = fetch_github(owner, repo, "issues")
     return load_issues(data)
+
 
 if __name__ == "__main__":
     owner = "sakhileln"
