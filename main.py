@@ -18,12 +18,15 @@ load_dotenv()
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
+
 def connect_to_vstore():
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    )
     ASTRA_DB_API_ENDPOINT = os.getenv("ASTRA_DB_API_ENDPOINT")
     ASTRA_DB_APPLICATION_TOKEN = os.getenv("ASTRA_DB_APPLICATION_TOKEN")
     desired_namespace = os.getenv("ASTRA_DB_KEYSPACE")
-    
+
     ASTRA_DB_KEYSPACE = desired_namespace if desired_namespace else None
 
     vstore = AstraDBVectorStore(
@@ -35,8 +38,12 @@ def connect_to_vstore():
     )
     return vstore
 
+
 vstore = connect_to_vstore()
-add_to_vectorstore = input("Do you want to update the issues? (y/N): ").lower() in ["yes", "y"]
+add_to_vectorstore = input("Do you want to update the issues? (y/N): ").lower() in [
+    "yes",
+    "y",
+]
 
 if add_to_vectorstore:
     owner = "sakhileln"
@@ -63,6 +70,7 @@ tools = [retriever_tool, note_tool]
 # Initialize Hugging Face pipeline
 llm_pipeline = pipeline("text-generation", model="facebook/opt-350m", device=-1)
 
+
 # Wrap Hugging Face model into a callable for LangChain
 class HuggingFaceAgentWrapper:
     def __init__(self, pipeline):
@@ -76,15 +84,21 @@ class HuggingFaceAgentWrapper:
             elif hasattr(input_text, "__str__"):
                 input_text = str(input_text)
             else:
-                raise TypeError("Input to HuggingFace pipeline must be a string or convertible to string.")
+                raise TypeError(
+                    "Input to HuggingFace pipeline must be a string or convertible to string."
+                )
 
         # Generate response using the pipeline
-        response = self.pipeline(input_text, max_length=512, truncation=True, num_return_sequences=1)
+        response = self.pipeline(
+            input_text, max_length=512, truncation=True, num_return_sequences=1
+        )
 
         # Ensure response is a string
         generated_text = response[0]["generated_text"]
         if not isinstance(generated_text, str):
-            raise TypeError(f"Generated text is expected to be a string, got {type(generated_text)} instead.")
+            raise TypeError(
+                f"Generated text is expected to be a string, got {type(generated_text)} instead."
+            )
 
         # Construct the required `message` object for ChatGeneration
         ai_message = AIMessage(content=generated_text)
@@ -95,6 +109,7 @@ class HuggingFaceAgentWrapper:
     def bind_tools(self, tools):
         self.tools = tools
         return self
+
 
 llm = HuggingFaceAgentWrapper(llm_pipeline)
 llm = llm.bind_tools(tools)
