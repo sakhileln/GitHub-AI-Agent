@@ -1,3 +1,36 @@
+"""
+GitHub Issues AI Agent Module.
+
+This module provides an interactive AI-powered assistant for querying GitHub issues 
+from a specified repository. It connects to an AstraDB Vector Store to retrieve 
+and store issue data, utilizes OpenAI models for generating responses, 
+and includes a tool-based framework for enhanced functionality.
+
+Key Features:
+1. AstraDB Integration:
+   - Establishes connection to AstraDB using environment variables.
+   - Supports updating the vector store with new issues.
+
+2. LangChain-based Tools:
+   - Uses LangChain retriever for advanced querying.
+   - Leverages OpenAI embeddings for vector search.
+
+3. Interactive Query Interface:
+   - Allows users to interactively ask questions about GitHub issues.
+   - Real-time query execution via an agent executor.
+
+Environment Variables Required:
+- ASTRA_DB_API_ENDPOINT: API endpoint for AstraDB.
+- ASTRA_DB_APPLICATION_TOKEN: Authentication token for AstraDB.
+- ASTRA_DB_KEYSPACE: Namespace to use in the vector store.
+
+How to Use:
+1. Ensure the required environment variables are set.
+2. Optionally update the vector store with issues from the specified GitHub repository.
+3. Interactively ask questions about GitHub issues through the command line.
+4. Type 'q' to exit the interactive loop.
+"""
+
 import os
 
 from dotenv import load_dotenv
