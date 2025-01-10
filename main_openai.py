@@ -1,12 +1,13 @@
-from dotenv import load_dotenv
 import os
 
+from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_astradb import AstraDBVectorStore
 from langchain.agents import create_tool_calling_agent
 from langchain.agents import AgentExecutor
 from langchain.tools.retriever import create_retriever_tool
 from langchain import hub
+
 from retriever import fetch_github_issues
 from summarizer import note_tool
 
