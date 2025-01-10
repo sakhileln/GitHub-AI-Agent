@@ -52,7 +52,8 @@ def connect_to_vstore():
     Connect to the AstraDB Vector Store using the environment variables for configuration.
 
     Returns:
-        AstraDBVectorStore: An instance of the AstraDB Vector Store connected to the specified collection.
+        AstraDBVectorStore: An instance of the AstraDB Vector Store connected to the
+        specified collection.
 
     The environment variables required for this function are:
     - `ASTRA_DB_API_ENDPOINT`: The API endpoint for the AstraDB instance.
@@ -106,7 +107,8 @@ retriever = vstore.as_retriever(search_kwargs={"k": 3})
 retriever_tool = create_retriever_tool(
     retriever,
     "github_search",
-    "Search for information about github issues. For any questions about github issues, you must use this tool!",
+    "Search for information about github issues. For any questions about github issues, \
+    you must use this tool!",
 )
 
 prompt = hub.pull("hwchase17/openai-functions-agent")
