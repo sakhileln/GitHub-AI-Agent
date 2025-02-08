@@ -96,7 +96,6 @@ Contributions are welcome! If you'd like to contribute. See the [CONTRIBUTING](C
 4. Submit a pull request explaining your changes.
 
 ## License
-
 This project is licensed under the GPL v3.0 License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
