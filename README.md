@@ -84,7 +84,6 @@ There are 5 open issues:
 2. Feature request: Add dark mode support.
 ...
 ```
-
 ## Contributing
 Contributions are welcome! If you'd like to contribute. See the [CONTRIBUTING](CONTRIBUTING.md) file for details.
 1. Fork the repository.
