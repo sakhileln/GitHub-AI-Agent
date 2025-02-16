@@ -1,7 +1,6 @@
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
-
 In the interest of fostering an open and welcoming environment, we as
 contributors and maintainers pledge to making participation in our project and
 our community a harassment-free experience for everyone, regardless of age, body
@@ -31,7 +30,6 @@ Examples of unacceptable behavior by participants include:
  professional setting
 
 ## Our Responsibilities
-
 Project maintainers are responsible for clarifying the standards of acceptable
 behavior and are expected to take appropriate and fair corrective action in
 response to any instances of unacceptable behavior.
