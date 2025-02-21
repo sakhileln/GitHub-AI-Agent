@@ -60,7 +60,6 @@ Example commands:
 - "List the pull requests and their statuses."
 
 ## Project Structure
-
 - `main.py`: The entry point of the application.
 - `retriever.py`: Handles interactions with the GitHub API and retrieves repository data.
 - `summarizer.py`: Uses LangChain and Hugging Face models to generate summaries from retrieved data.
@@ -98,7 +97,6 @@ Contributions are welcome! If you'd like to contribute. See the [CONTRIBUTING](C
 This project is licensed under the GPL v3.0 License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
-
 - [LangChain](https://www.langchain.com/): For providing robust tools to handle language model operations.
 - [Hugging Face](https://huggingface.co/): For providing versatile and high-quality machine learning models.
 - GitHub: For offering a robust platform for collaboration and version control.
