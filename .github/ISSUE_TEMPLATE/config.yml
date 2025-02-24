@@ -2,7 +2,7 @@ name: Bug Report
 description: File a bug report.
 title: "[Bug]: "
 labels: ["bug", "triage"]
-projects: ["SkillSync/1", "SkillSync/44"]
+projects: ["Github-AI-Agent/1", "Github-AI-Agent/44"]
 assignees:
   - sakhileln
 body:
@@ -58,7 +58,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/sakhileln/SkillSync/blob/main/CODE_OF_CONDUCT.md). 
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/sakhileln/Github-AI-Agent/blob/main/CODE_OF_CONDUCT.md). 
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
