@@ -41,7 +41,7 @@ jobs:
       - name: Install pylint
         run: |
           python -m pip install pylint
-          python -m pip install -r requirements.txt
+          # python -m pip install -r requirements.txt
       - name: Run Pylint
         run: |
           pylint --ignore-paths=.venv .
