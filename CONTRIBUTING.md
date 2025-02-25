@@ -88,9 +88,7 @@ For most contributions, after your first pull request is accepted and merged, yo
 - Use spaces, not tabs.
 
 ## :memo: Writing Commit Messages
-
 Please [write a great commit message](https://chris.beams.io/posts/git-commit/).
-
 1. Separate subject from body with a blank line
 1. Limit the subject line to 50 characters
 1. Capitalize the subject line
@@ -134,7 +132,6 @@ See also: #456, #789
 ```
 
 ## :white_check_mark: Code Review
-
 - **Review the code, not the author.** Look for and suggest improvements without disparaging or insulting the author. Provide actionable feedback and explain your reasoning.
 
 - **You are not your code.** When your code is critiqued, questioned, or constructively criticized, remember that you are not your code. Do not take code review personally.
