@@ -88,7 +88,6 @@ For most contributions, after your first pull request is accepted and merged, yo
 - Use spaces, not tabs.
 
 ## :memo: Writing Commit Messages
-
 Please [write a great commit message](https://chris.beams.io/posts/git-commit/).
 1. Separate subject from body with a blank line
 1. Limit the subject line to 50 characters
