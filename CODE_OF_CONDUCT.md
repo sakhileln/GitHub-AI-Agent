@@ -1,7 +1,6 @@
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
-
 In the interest of fostering an open and welcoming environment, we as
 contributors and maintainers pledge to making participation in our project and
 our community a harassment-free experience for everyone, regardless of age, body
@@ -10,7 +9,6 @@ level of experience, education, socio-economic status, nationality, personal
 appearance, race, religion, or sexual identity and orientation.
 
 ## Our Standards
-
 Examples of behavior that contributes to creating a positive environment
 include:
 
@@ -43,7 +41,6 @@ permanently any contributor for other behaviors that they deem inappropriate,
 threatening, offensive, or harmful.
 
 ## Scope
-
 This Code of Conduct applies both within project spaces and in public spaces
 when an individual is representing the project or its community. Examples of
 representing a project or community include using an official project e-mail
