@@ -1,5 +1,4 @@
 # Contributor Covenant Code of Conduct
-
 ## Our Pledge
 In the interest of fostering an open and welcoming environment, we as
 contributors and maintainers pledge to making participation in our project and
@@ -61,7 +60,6 @@ faith may face temporary or permanent repercussions as determined by other
 members of the project's leadership.
 
 ## Attribution
-
 This Code of Conduct is adapted from the [Contributor Covenant][homepage],
 version 2.1, available at
 [https://www.contributor-covenant.org/version/2/1/code_of_conduct.html][v2.1].
