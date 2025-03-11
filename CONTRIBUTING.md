@@ -148,6 +148,7 @@ For example, if all private properties are prefixed with an underscore `_`, then
 When possible, style and format will be enforced with a linter.
 
 ## :medal_sports: Certificate of Origin
+
 *Developer's Certificate of Origin 1.1*
 
 By making a contribution to this project, I certify that:
@@ -159,6 +160,7 @@ By making a contribution to this project, I certify that:
 
 
 ## :wink: Contribute
+
 1. Fork the repository
 2. Create your feature branch:
     ```bash
