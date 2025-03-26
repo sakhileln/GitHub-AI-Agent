@@ -3,6 +3,7 @@
 This repository contains a GitHub AI assistant implemented in Python, leveraging Retrieval-Augmented Generation (RAG) and LangChain. This agent is designed to help users interact with GitHub repositories by retrieving and summarizing information such as issues, pull requests, and more.
 
 ## Table of Contents
+
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
